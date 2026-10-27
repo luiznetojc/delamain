@@ -1,0 +1,244 @@
+{
+  "lockfileVersion": 1,
+  "harnessVersion": "0.1.0",
+  "profile": "typescript",
+  "skills": {
+    "planning": {
+      "name": "planning",
+      "version": "1.0.0",
+      "sourcePath": "catalog:skills/planning/SKILL.md",
+      "installedPath": ".agents/skills/planning/SKILL.md",
+      "sha256": "d548b6832fe1444749eff377e780d7a5574f1ecf9f48219cb1497c9c25aaea1c"
+    },
+    "architecture": {
+      "name": "architecture",
+      "version": "1.0.0",
+      "sourcePath": "catalog:skills/architecture/SKILL.md",
+      "installedPath": ".agents/skills/architecture/SKILL.md",
+      "sha256": "2123ba14e7f272fc522e56569353ac8289dcb525c11bf41d5c04161668c98985"
+    },
+    "typescript-backend": {
+      "name": "typescript-backend",
+      "version": "1.0.0",
+      "sourcePath": "catalog:skills/typescript-backend/SKILL.md",
+      "installedPath": ".agents/skills/typescript-backend/SKILL.md",
+      "sha256": "15e730f93cbc4aeb0e4758e2cdb9a0c08302bb3987529efcbc32795d551e4d55"
+    },
+    "tdd": {
+      "name": "tdd",
+      "version": "1.0.0",
+      "sourcePath": "catalog:skills/tdd/SKILL.md",
+      "installedPath": ".agents/skills/tdd/SKILL.md",
+      "sha256": "8b52751f016a7f6cd6ddc25b9bb1162f66005eb0fa3b9c09ce0f651842a379b1"
+    },
+    "code-review": {
+      "name": "code-review",
+      "version": "1.0.0",
+      "sourcePath": "catalog:skills/code-review/SKILL.md",
+      "installedPath": ".agents/skills/code-review/SKILL.md",
+      "sha256": "e269039adfd73b6c1e2f2d64d7f4cd324e1de37ab706904c314508c73640e274"
+    },
+    "security-review": {
+      "name": "security-review",
+      "version": "1.0.0",
+      "sourcePath": "catalog:skills/security-review/SKILL.md",
+      "installedPath": ".agents/skills/security-review/SKILL.md",
+      "sha256": "5d15c0307fb589ac43a2fd2fb3d40cb18adcc8d09606de4caf43c0c10380236b"
+    },
+    "handoff": {
+      "name": "handoff",
+      "version": "1.0.0",
+      "sourcePath": "catalog:skills/handoff/SKILL.md",
+      "installedPath": ".agents/skills/handoff/SKILL.md",
+      "sha256": "3d393c5657cef3c1a4db6a4f6ec5814d5d832a354ddc0e054d3030da1f506fd7"
+    }
+  },
+  "workflows": {
+    "feature": {
+      "id": "feature",
+      "version": "1.0.0",
+      "installedPath": ".agents/workflows/feature.yaml",
+      "sha256": "1ccf6ba4fd421b842357ceb7fb56a705013b2c4b50c48eb34bdaf764729a292e"
+    },
+    "bugfix": {
+      "id": "bugfix",
+      "version": "1.0.0",
+      "installedPath": ".agents/workflows/bugfix.yaml",
+      "sha256": "f239c07cf52257172565f41db9ac63a4bc7dcf83bdcdb55afdac366c698d668e"
+    },
+    "refactor": {
+      "id": "refactor",
+      "version": "1.0.0",
+      "installedPath": ".agents/workflows/refactor.yaml",
+      "sha256": "fa11c3787bb30461e0b9fa4886dc7f4d3a9fce21a5ada096b441f20f988c39a3"
+    },
+    "security-review": {
+      "id": "security-review",
+      "version": "1.0.0",
+      "installedPath": ".agents/workflows/security-review.yaml",
+      "sha256": "e4df396f826aaf7e042426a1504c4a58bcb5d21db3c57626d53d724f09b16c44"
+    },
+    "test-improvement": {
+      "id": "test-improvement",
+      "version": "1.0.0",
+      "installedPath": ".agents/workflows/test-improvement.yaml",
+      "sha256": "030eec87acc2ae36b9a1ad6a8d0e9f6471c586098541872061e85cb7823ead9c"
+    }
+  },
+  "managedFiles": {
+    ".agents/skills/planning/SKILL.md": {
+      "path": ".agents/skills/planning/SKILL.md",
+      "ownership": "generated",
+      "sha256": "d548b6832fe1444749eff377e780d7a5574f1ecf9f48219cb1497c9c25aaea1c"
+    },
+    ".agents/skills/architecture/SKILL.md": {
+      "path": ".agents/skills/architecture/SKILL.md",
+      "ownership": "generated",
+      "sha256": "2123ba14e7f272fc522e56569353ac8289dcb525c11bf41d5c04161668c98985"
+    },
+    ".agents/skills/typescript-backend/SKILL.md": {
+      "path": ".agents/skills/typescript-backend/SKILL.md",
+      "ownership": "generated",
+      "sha256": "15e730f93cbc4aeb0e4758e2cdb9a0c08302bb3987529efcbc32795d551e4d55"
+    },
+    ".agents/skills/tdd/SKILL.md": {
+      "path": ".agents/skills/tdd/SKILL.md",
+      "ownership": "generated",
+      "sha256": "8b52751f016a7f6cd6ddc25b9bb1162f66005eb0fa3b9c09ce0f651842a379b1"
+    },
+    ".agents/skills/code-review/SKILL.md": {
+      "path": ".agents/skills/code-review/SKILL.md",
+      "ownership": "generated",
+      "sha256": "e269039adfd73b6c1e2f2d64d7f4cd324e1de37ab706904c314508c73640e274"
+    },
+    ".agents/skills/security-review/SKILL.md": {
+      "path": ".agents/skills/security-review/SKILL.md",
+      "ownership": "generated",
+      "sha256": "5d15c0307fb589ac43a2fd2fb3d40cb18adcc8d09606de4caf43c0c10380236b"
+    },
+    ".agents/skills/handoff/SKILL.md": {
+      "path": ".agents/skills/handoff/SKILL.md",
+      "ownership": "generated",
+      "sha256": "3d393c5657cef3c1a4db6a4f6ec5814d5d832a354ddc0e054d3030da1f506fd7"
+    },
+    ".agents/workflows/feature.yaml": {
+      "path": ".agents/workflows/feature.yaml",
+      "ownership": "generated",
+      "sha256": "1ccf6ba4fd421b842357ceb7fb56a705013b2c4b50c48eb34bdaf764729a292e"
+    },
+    ".agents/workflows/bugfix.yaml": {
+      "path": ".agents/workflows/bugfix.yaml",
+      "ownership": "generated",
+      "sha256": "f239c07cf52257172565f41db9ac63a4bc7dcf83bdcdb55afdac366c698d668e"
+    },
+    ".agents/workflows/refactor.yaml": {
+      "path": ".agents/workflows/refactor.yaml",
+      "ownership": "generated",
+      "sha256": "fa11c3787bb30461e0b9fa4886dc7f4d3a9fce21a5ada096b441f20f988c39a3"
+    },
+    ".agents/workflows/security-review.yaml": {
+      "path": ".agents/workflows/security-review.yaml",
+      "ownership": "generated",
+      "sha256": "e4df396f826aaf7e042426a1504c4a58bcb5d21db3c57626d53d724f09b16c44"
+    },
+    ".agents/workflows/test-improvement.yaml": {
+      "path": ".agents/workflows/test-improvement.yaml",
+      "ownership": "generated",
+      "sha256": "030eec87acc2ae36b9a1ad6a8d0e9f6471c586098541872061e85cb7823ead9c"
+    },
+    ".agents/rules/harness-core.md": {
+      "path": ".agents/rules/harness-core.md",
+      "ownership": "generated",
+      "sha256": "d96684c54659938ea66bbe9892e7ef8a2ecab717bc25a0623ba9a77201d577ca"
+    },
+    ".agents/rules/typescript-conventions.md": {
+      "path": ".agents/rules/typescript-conventions.md",
+      "ownership": "generated",
+      "sha256": "53ea42924be07bd24121a03488ee4c80786814caf9bafd8f417fb6bd680d2f3f"
+    },
+    ".agents/hooks/dlm-hook.mjs": {
+      "path": ".agents/hooks/dlm-hook.mjs",
+      "ownership": "generated",
+      "sha256": "21039b5fd65037d6c048bc32b8446c9dcb1100bb4c9904ce1c06ecd440e9cf4e"
+    },
+    "CLAUDE.md": {
+      "path": "CLAUDE.md",
+      "ownership": "generated",
+      "runtime": "claude-code",
+      "sha256": "49372176ba56e4840a0633c9e9a923619b4935428bb1a6fe359478ecc5f66b85"
+    },
+    ".claude/skills/planning/SKILL.md": {
+      "path": ".claude/skills/planning/SKILL.md",
+      "ownership": "generated",
+      "runtime": "claude-code",
+      "sha256": "d548b6832fe1444749eff377e780d7a5574f1ecf9f48219cb1497c9c25aaea1c"
+    },
+    ".claude/skills/architecture/SKILL.md": {
+      "path": ".claude/skills/architecture/SKILL.md",
+      "ownership": "generated",
+      "runtime": "claude-code",
+      "sha256": "2123ba14e7f272fc522e56569353ac8289dcb525c11bf41d5c04161668c98985"
+    },
+    ".claude/skills/typescript-backend/SKILL.md": {
+      "path": ".claude/skills/typescript-backend/SKILL.md",
+      "ownership": "generated",
+      "runtime": "claude-code",
+      "sha256": "15e730f93cbc4aeb0e4758e2cdb9a0c08302bb3987529efcbc32795d551e4d55"
+    },
+    ".claude/skills/tdd/SKILL.md": {
+      "path": ".claude/skills/tdd/SKILL.md",
+      "ownership": "generated",
+      "runtime": "claude-code",
+      "sha256": "8b52751f016a7f6cd6ddc25b9bb1162f66005eb0fa3b9c09ce0f651842a379b1"
+    },
+    ".claude/skills/code-review/SKILL.md": {
+      "path": ".claude/skills/code-review/SKILL.md",
+      "ownership": "generated",
+      "runtime": "claude-code",
+      "sha256": "e269039adfd73b6c1e2f2d64d7f4cd324e1de37ab706904c314508c73640e274"
+    },
+    ".claude/skills/security-review/SKILL.md": {
+      "path": ".claude/skills/security-review/SKILL.md",
+      "ownership": "generated",
+      "runtime": "claude-code",
+      "sha256": "5d15c0307fb589ac43a2fd2fb3d40cb18adcc8d09606de4caf43c0c10380236b"
+    },
+    ".claude/skills/handoff/SKILL.md": {
+      "path": ".claude/skills/handoff/SKILL.md",
+      "ownership": "generated",
+      "runtime": "claude-code",
+      "sha256": "3d393c5657cef3c1a4db6a4f6ec5814d5d832a354ddc0e054d3030da1f506fd7"
+    },
+    ".claude/settings.json": {
+      "path": ".claude/settings.json",
+      "ownership": "generated",
+      "runtime": "claude-code",
+      "sha256": "cdf9d6fc4556e75a435209c13dee46d00ab24ee88e68d61e862e836c4f254117"
+    },
+    "AGENTS.md": {
+      "path": "AGENTS.md",
+      "ownership": "generated",
+      "runtime": "codex",
+      "sha256": "b587dd082ee0d5295fc17333ec0edbaead1e0d2f62baf639824901e9534694fe"
+    },
+    ".codex/hooks.json": {
+      "path": ".codex/hooks.json",
+      "ownership": "generated",
+      "runtime": "codex",
+      "sha256": "41a0c46de7d2ff0fe30eb48161238123ee8a53956a0ceba85aa01839a021a75f"
+    },
+    ".codex/config.toml": {
+      "path": ".codex/config.toml",
+      "ownership": "generated",
+      "runtime": "codex",
+      "sha256": "d241b8a85f52094b2cb58ac0355a91d71ecaf02719a41182cead09f8063d55db"
+    },
+    ".agents/hooks.json": {
+      "path": ".agents/hooks.json",
+      "ownership": "generated",
+      "runtime": "agy",
+      "sha256": "7dca50af198c76cbdf0a8680a7ab46036368826f4a477a2ed0ba74b175468b5e"
+    }
+  },
+  "generatedAt": "2026-10-21T18:12:28.301Z"
+}

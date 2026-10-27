@@ -1,0 +1,13 @@
+node_modules/
+dist/
+bin/
+obj/
+TestResults/
+.ai-harness-state/
+*.tsbuildinfo
+*.log
+.DS_Store
+coverage/
+.env
+.env.*
+!.env.example

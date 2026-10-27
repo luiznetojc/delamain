@@ -1,0 +1,66 @@
+schemaVersion: "1.0"
+id: test-improvement
+name: "Test Coverage & Mutation Hardening Workflow"
+description: "Analyze coverage/mutation gaps, author high-value tests, and verify suite determinism."
+version: "1.0.0"
+stages:
+  - id: gap-analysis
+    name: "Coverage & Edge-Case Gap Analysis"
+    description: "Identify untested branches, boundary conditions, and surviving mutants."
+    role: planner
+    enabled: true
+    mandatoryGate: false
+    dependsOn: []
+    preferredRuntime: claude-code
+    skills:
+      - planning
+      - tdd
+    validators: []
+    acceptanceCriteria:
+      - "Prioritized list of uncovered behaviors and edge cases."
+    retryPolicy:
+      maxRetries: 1
+      backoffMs: 1000
+    timeoutMs: 300000
+  - id: test-authoring
+    name: "Test Suite Expansion"
+    description: "Write deterministic unit and integration tests for target behaviors."
+    role: tester
+    enabled: true
+    mandatoryGate: false
+    dependsOn:
+      - gap-analysis
+    preferredRuntime: codex
+    skills:
+      - tdd
+    validators: []
+    acceptanceCriteria:
+      - "New tests assert real domain invariants, not tautologies."
+    retryPolicy:
+      maxRetries: 2
+      backoffMs: 1000
+    timeoutMs: 600000
+  - id: verification
+    name: "Test Determinism & Quality Gate"
+    description: "Execute full test and quality validators."
+    role: reviewer
+    enabled: true
+    mandatoryGate: true
+    dependsOn:
+      - test-authoring
+    preferredRuntime: any
+    skills:
+      - code-review
+      - handoff
+    validators:
+      - "*"
+    acceptanceCriteria:
+      - "All tests pass deterministically with improved coverage."
+    retryPolicy:
+      maxRetries: 1
+      backoffMs: 1000
+    timeoutMs: 300000
+    approvalGate:
+      required: true
+      approver: automated-validators
+      reason: "Mandatory test suite validation"

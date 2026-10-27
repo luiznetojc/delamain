@@ -1,0 +1,80 @@
+schemaVersion: "1.0"
+project:
+  id: delamain
+  name: delamain
+  description: delamain AI Development Harness (typescript profile)
+  primaryLanguage: typescript
+profile: typescript
+harnessSource:
+  version: 0.1.0
+runtimes:
+  - claude-code
+  - codex
+  - agy
+coordinator:
+  preferredRuntime: claude-code
+  useOrcaWhenAvailable: true
+  maxParallelAgents: 4
+skills:
+  - planning
+  - architecture
+  - typescript-backend
+  - tdd
+  - code-review
+  - security-review
+  - handoff
+workflows:
+  default: feature
+  enabled:
+    - feature
+    - bugfix
+    - refactor
+    - security-review
+    - test-improvement
+hooks:
+  telemetry: true
+  safetyGuards: true
+validators:
+  - id: ts-typecheck
+    name: TypeScript Typecheck
+    kind: typecheck
+    command: npm
+    args:
+      - run
+      - typecheck
+      - --if-present
+    timeoutMs: 120000
+    required: true
+    enabled: true
+  - id: ts-build
+    name: TypeScript Build
+    kind: build
+    command: npm
+    args:
+      - run
+      - build
+      - --if-present
+    timeoutMs: 120000
+    required: true
+    enabled: true
+  - id: ts-unit-test
+    name: TypeScript Unit Tests
+    kind: unit-test
+    command: npm
+    args:
+      - test
+      - --if-present
+    timeoutMs: 180000
+    required: true
+    enabled: true
+policies:
+  allowDestructiveCommands: false
+  allowBypassPermissions: false
+  redactSecretsInLogs: true
+  protectedBranches:
+    - main
+    - master
+    - production
+  forbiddenPaths:
+    - .env
+    - .env.production

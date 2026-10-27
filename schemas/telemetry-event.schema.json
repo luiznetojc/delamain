@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://delamain.dev/schemas/telemetry-event.schema.json",
+  "title": "Delamain Telemetry Event",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "eventId",
+    "eventType",
+    "timestamp",
+    "projectId",
+    "sessionId",
+    "traceId",
+    "spanId",
+    "runtime",
+    "harnessVersion"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "1.0" },
+    "eventId": { "type": "string", "minLength": 1 },
+    "eventType": {
+      "type": "string",
+      "enum": [
+        "session.started",
+        "session.completed",
+        "session.failed",
+        "workflow.started",
+        "workflow.completed",
+        "workflow.failed",
+        "stage.started",
+        "stage.completed",
+        "stage.failed",
+        "stage.skipped",
+        "agent.dispatched",
+        "agent.started",
+        "agent.completed",
+        "agent.failed",
+        "skill.loaded",
+        "skill.invoked",
+        "tool.called",
+        "tool.completed",
+        "tool.failed",
+        "validation.started",
+        "validation.completed",
+        "handoff.created",
+        "handoff.consumed"
+      ]
+    },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "projectId": { "type": "string" },
+    "sessionId": { "type": "string" },
+    "traceId": { "type": "string" },
+    "spanId": { "type": "string" },
+    "parentSpanId": { "type": "string" },
+    "workflowId": { "type": "string" },
+    "stageId": { "type": "string" },
+    "agentId": { "type": "string" },
+    "runtime": { "type": "string", "enum": ["claude-code", "codex", "agy", "cli", "orca"] },
+    "model": { "type": "string" },
+    "harnessVersion": { "type": "string" },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "inputTokens": { "$ref": "#/$defs/provenanceMetric" },
+        "outputTokens": { "$ref": "#/$defs/provenanceMetric" },
+        "cacheReadTokens": { "$ref": "#/$defs/provenanceMetric" },
+        "cacheWriteTokens": { "$ref": "#/$defs/provenanceMetric" },
+        "reasoningTokens": { "$ref": "#/$defs/provenanceMetric" },
+        "durationMs": { "$ref": "#/$defs/provenanceMetric" },
+        "estimatedApiCostUsd": { "$ref": "#/$defs/provenanceMetric" }
+      }
+    },
+    "payload": {
+      "type": "object"
+    }
+  },
+  "$defs": {
+    "provenanceMetric": {
+      "type": "object",
+      "required": ["value", "provenance"],
+      "additionalProperties": false,
+      "properties": {
+        "value": { "type": ["number", "null"] },
+        "provenance": { "type": "string", "enum": ["measured", "estimated", "derived", "unavailable"] }
+      }
+    }
+  }
+}

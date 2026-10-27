@@ -1,0 +1,65 @@
+schemaVersion: "1.0"
+id: bugfix
+name: "Bugfix & Regression Workflow"
+description: "Root-cause investigation, failing regression test reproduction, surgical fix, and verification."
+version: "1.0.0"
+stages:
+  - id: diagnosis
+    name: "Root Cause Diagnosis"
+    description: "Investigate symptoms, trace inputs, and reproduce the failure."
+    role: planner
+    enabled: true
+    mandatoryGate: false
+    dependsOn: []
+    preferredRuntime: claude-code
+    skills:
+      - planning
+    validators: []
+    acceptanceCriteria:
+      - "Root cause is identified with concrete evidence."
+    retryPolicy:
+      maxRetries: 1
+      backoffMs: 1000
+    timeoutMs: 300000
+  - id: regression-fix
+    name: "Regression Test & Surgical Fix"
+    description: "Write a failing test reproducing the bug, then apply the minimal surgical fix."
+    role: implementer
+    enabled: true
+    mandatoryGate: false
+    dependsOn:
+      - diagnosis
+    preferredRuntime: codex
+    skills:
+      - tdd
+    validators: []
+    acceptanceCriteria:
+      - "Regression test fails before fix and passes after fix."
+    retryPolicy:
+      maxRetries: 2
+      backoffMs: 2000
+    timeoutMs: 600000
+  - id: verification
+    name: "Verification & Code Review Gate"
+    description: "Verify all tests pass and no collateral changes were introduced."
+    role: reviewer
+    enabled: true
+    mandatoryGate: true
+    dependsOn:
+      - regression-fix
+    preferredRuntime: any
+    skills:
+      - code-review
+      - handoff
+    validators:
+      - "*"
+    acceptanceCriteria:
+      - "All project validators pass and diff is scoped strictly to the fix."
+    retryPolicy:
+      maxRetries: 1
+      backoffMs: 1000
+    timeoutMs: 300000
+    approvalGate:
+      required: true
+      approver: automated-validators
+      reason: "Mandatory regression gate"

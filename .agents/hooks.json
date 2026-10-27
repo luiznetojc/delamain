@@ -1,0 +1,43 @@
+{
+  "delamain-harness": {
+    "enabled": true,
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "node ../hooks/dlm-hook.mjs SessionStart agy",
+        "timeout": 5
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "run_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ../hooks/dlm-hook.mjs PreToolUse agy",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ../hooks/dlm-hook.mjs PostToolUse agy",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "type": "command",
+        "command": "node ../hooks/dlm-hook.mjs Stop agy",
+        "timeout": 5
+      }
+    ]
+  }
+}

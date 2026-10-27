@@ -1,0 +1,66 @@
+schemaVersion: "1.0"
+id: refactor
+name: "Safe Refactoring Workflow"
+description: "Characterization tests, incremental structural refactoring, and behavior-preservation verification."
+version: "1.0.0"
+stages:
+  - id: characterization
+    name: "Baseline & Characterization Tests"
+    description: "Ensure existing behavior is covered by tests before changing structure."
+    role: tester
+    enabled: true
+    mandatoryGate: false
+    dependsOn: []
+    preferredRuntime: claude-code
+    skills:
+      - architecture
+      - tdd
+    validators: []
+    acceptanceCriteria:
+      - "Baseline test suite passes and covers target modules."
+    retryPolicy:
+      maxRetries: 1
+      backoffMs: 1000
+    timeoutMs: 300000
+  - id: structural-refactor
+    name: "Incremental Refactoring"
+    description: "Apply structural changes without altering external behavior."
+    role: implementer
+    enabled: true
+    mandatoryGate: false
+    dependsOn:
+      - characterization
+    preferredRuntime: codex
+    skills:
+      - architecture
+    validators: []
+    acceptanceCriteria:
+      - "Public contracts and observable behavior remain unchanged."
+    retryPolicy:
+      maxRetries: 2
+      backoffMs: 1000
+    timeoutMs: 600000
+  - id: verification
+    name: "Behavior Preservation Gate"
+    description: "Verify all tests and architectural checks pass."
+    role: reviewer
+    enabled: true
+    mandatoryGate: true
+    dependsOn:
+      - structural-refactor
+    preferredRuntime: any
+    skills:
+      - code-review
+      - handoff
+    validators:
+      - "*"
+    acceptanceCriteria:
+      - "Zero test regressions and improved structural metrics."
+    retryPolicy:
+      maxRetries: 1
+      backoffMs: 1000
+    timeoutMs: 300000
+    approvalGate:
+      required: true
+      approver: automated-validators
+      reason: "Mandatory behavior preservation gate"

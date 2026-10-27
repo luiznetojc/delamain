@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://delamain.dev/schemas/handoff.schema.json",
+  "title": "Delamain Cross-Runtime Handoff Contract",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "handoffId",
+    "createdAt",
+    "sessionId",
+    "sourceRuntime",
+    "targetRuntime",
+    "task",
+    "workflow",
+    "gitState",
+    "architecturalDecisions",
+    "knownIssues",
+    "relevantFiles",
+    "validationResults",
+    "nextActions"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "1.0" },
+    "handoffId": { "type": "string", "minLength": 1 },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "consumedAt": { "type": "string", "format": "date-time" },
+    "consumedByRuntime": { "type": "string" },
+    "sessionId": { "type": "string", "minLength": 1 },
+    "sourceRuntime": { "type": "string", "enum": ["claude-code", "codex", "agy", "cli"] },
+    "targetRuntime": { "type": "string", "enum": ["claude-code", "codex", "agy", "any"] },
+    "task": {
+      "type": "object",
+      "required": ["objective", "requirements", "plan"],
+      "additionalProperties": false,
+      "properties": {
+        "objective": { "type": "string", "minLength": 1 },
+        "requirements": { "type": "array", "items": { "type": "string" } },
+        "plan": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "workflow": {
+      "type": "object",
+      "required": ["workflowId", "completedStages", "pendingStages"],
+      "additionalProperties": false,
+      "properties": {
+        "workflowId": { "type": "string" },
+        "completedStages": { "type": "array", "items": { "type": "string" } },
+        "pendingStages": { "type": "array", "items": { "type": "string" } },
+        "skippedStages": { "type": "array", "items": { "type": "string" } },
+        "activeStage": { "type": "string" }
+      }
+    },
+    "gitState": {
+      "type": "object",
+      "required": ["branch", "commitSha", "worktreePath", "isDirty", "modifiedFiles"],
+      "additionalProperties": false,
+      "properties": {
+        "branch": { "type": "string" },
+        "commitSha": { "type": "string" },
+        "worktreePath": { "type": "string" },
+        "isDirty": { "type": "boolean" },
+        "modifiedFiles": { "type": "array", "items": { "type": "string" } },
+        "diffStatHash": { "type": "string" }
+      }
+    },
+    "architecturalDecisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "decision", "rationale"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "decision": { "type": "string" },
+          "rationale": { "type": "string" }
+        }
+      }
+    },
+    "knownIssues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "severity", "description"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "severity": { "type": "string", "enum": ["low", "medium", "high", "blocker"] },
+          "description": { "type": "string" },
+          "workaround": { "type": "string" }
+        }
+      }
+    },
+    "relevantFiles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "role"],
+        "additionalProperties": false,
+        "properties": {
+          "path": { "type": "string" },
+          "role": { "type": "string" },
+          "sha256": { "type": "string" }
+        }
+      }
+    },
+    "validationResults": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["validatorId", "status", "executedAt", "command"],
+        "additionalProperties": false,
+        "properties": {
+          "validatorId": { "type": "string" },
+          "status": { "type": "string", "enum": ["passed", "failed", "skipped", "unavailable"] },
+          "executedAt": { "type": "string", "format": "date-time" },
+          "command": { "type": "string" },
+          "exitCode": { "type": "integer" },
+          "summary": { "type": "string" }
+        }
+      }
+    },
+    "nextActions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    }
+  }
+}

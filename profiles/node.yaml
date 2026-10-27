@@ -1,0 +1,59 @@
+schemaVersion: "1.0"
+profile: node
+description: "Node.js / TypeScript profile with typecheck, lint, test, and coverage validators"
+primaryLanguage: typescript
+runtimes:
+  - claude-code
+  - codex
+  - agy
+coordinator:
+  preferredRuntime: claude-code
+  useOrcaWhenAvailable: true
+  maxParallelAgents: 4
+skills:
+  - planning
+  - architecture
+  - typescript-backend
+  - tdd
+  - code-review
+  - security-review
+  - handoff
+workflows:
+  default: feature
+  enabled:
+    - feature
+    - bugfix
+    - refactor
+    - security-review
+    - test-improvement
+hooks:
+  telemetry: true
+  safetyGuards: true
+validators:
+  - id: ts-build
+    name: "TypeScript Build / Typecheck"
+    kind: build
+    command: npm
+    args: ["run", "build", "--if-present"]
+    timeoutMs: 120000
+    required: true
+    enabled: true
+  - id: ts-unit-test
+    name: "Unit Tests"
+    kind: unit-test
+    command: npm
+    args: ["test", "--if-present"]
+    timeoutMs: 180000
+    required: true
+    enabled: true
+policies:
+  allowDestructiveCommands: false
+  allowBypassPermissions: false
+  redactSecretsInLogs: true
+  protectedBranches:
+    - main
+    - master
+    - production
+  forbiddenPaths:
+    - ".env"
+    - ".env.production"

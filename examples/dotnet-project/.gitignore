@@ -1,0 +1,5 @@
+bin/
+obj/
+TestResults/
+.ai-harness/state/
+.ai-harness-state/

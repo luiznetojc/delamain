@@ -1,0 +1,60 @@
+schemaVersion: "1.0"
+profile: dotnet
+description: ".NET / C# backend profile with xUnit test and build validators"
+primaryLanguage: csharp
+runtimes:
+  - claude-code
+  - codex
+  - agy
+coordinator:
+  preferredRuntime: claude-code
+  useOrcaWhenAvailable: true
+  maxParallelAgents: 4
+skills:
+  - planning
+  - architecture
+  - dotnet-backend
+  - tdd
+  - code-review
+  - security-review
+  - handoff
+workflows:
+  default: feature
+  enabled:
+    - feature
+    - bugfix
+    - refactor
+    - security-review
+    - test-improvement
+hooks:
+  telemetry: true
+  safetyGuards: true
+validators:
+  - id: dotnet-build
+    name: ".NET Solution Build"
+    kind: build
+    command: dotnet
+    args: ["build", "--nologo", "-v", "minimal"]
+    timeoutMs: 120000
+    required: true
+    enabled: true
+  - id: dotnet-test
+    name: ".NET xUnit Tests"
+    kind: unit-test
+    command: dotnet
+    args: ["test", "--no-build", "--nologo", "-v", "minimal"]
+    timeoutMs: 180000
+    required: true
+    enabled: true
+policies:
+  allowDestructiveCommands: false
+  allowBypassPermissions: false
+  redactSecretsInLogs: true
+  protectedBranches:
+    - main
+    - master
+    - production
+  forbiddenPaths:
+    - ".env"
+    - ".env.production"
+    - "appsettings.Production.json"

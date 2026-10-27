@@ -1,0 +1,39 @@
+{
+  "name": "delamain-harness",
+  "version": "0.1.0",
+  "description": "Delamain (dlm) — Reusable, portable, observable AI Development Harness for Claude Code, Codex, Antigravity (agy), and Orca",
+  "type": "module",
+  "bin": {
+    "dlm": "./dist/cli/bin.js",
+    "delamain": "./dist/cli/bin.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "skills",
+    "hooks",
+    "scripts",
+    "workflows",
+    "profiles",
+    "templates",
+    "schemas"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.build.json && tsc --noEmit",
+    "test": "npm run build && node --no-warnings --test 'tests/**/*.test.ts'",
+    "dlm": "node ./dist/cli/bin.js"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "dependencies": {
+    "yaml": "2.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.1",
+    "typescript": "5.9.3"
+  },
+  "license": "MIT"
+}

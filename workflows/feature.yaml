@@ -1,0 +1,137 @@
+schemaVersion: "1.0"
+id: feature
+name: "Feature Development Workflow"
+description: "End-to-end feature workflow with DAG parallelism for code review and security review before final verification gate."
+version: "1.0.0"
+lifecycleHooks:
+  onWorkflowStart:
+    - "session.context.verify"
+  onWorkflowComplete:
+    - "handoff.checkpoint"
+  onWorkflowFail:
+    - "diagnostics.capture"
+stages:
+  - id: planning
+    name: "Requirements & Specification Planning"
+    description: "Analyze requirements, inspect affected files, and define acceptance criteria."
+    role: planner
+    enabled: true
+    mandatoryGate: false
+    dependsOn: []
+    preferredRuntime: claude-code
+    preferredModel: claude-sonnet-4-6
+    skills:
+      - planning
+    validators: []
+    acceptanceCriteria:
+      - "Scope, requirements, and target files are documented."
+      - "Acceptance criteria are verifiable."
+    retryPolicy:
+      maxRetries: 1
+      backoffMs: 1000
+    timeoutMs: 300000
+    approvalGate:
+      required: false
+      approver: coordinator
+      reason: "Coordinator validates specification completeness"
+  - id: architecture
+    name: "Architecture & Contract Design"
+    description: "Design module boundaries, interfaces, and file ownership."
+    role: architect
+    enabled: true
+    mandatoryGate: false
+    dependsOn:
+      - planning
+    preferredRuntime: claude-code
+    preferredModel: claude-opus-4-6
+    skills:
+      - architecture
+    validators: []
+    acceptanceCriteria:
+      - "Interfaces and dependency boundaries respect SOLID and project layering."
+    retryPolicy:
+      maxRetries: 1
+      backoffMs: 1000
+    timeoutMs: 300000
+  - id: implementation
+    name: "TDD Implementation"
+    description: "Write failing tests first, implement feature logic, and refactor cleanly."
+    role: implementer
+    enabled: true
+    mandatoryGate: false
+    dependsOn:
+      - architecture
+    preferredRuntime: codex
+    preferredModel: gpt-5-codex
+    skills:
+      - tdd
+    validators: []
+    acceptanceCriteria:
+      - "Unit and integration tests cover the new feature behavior."
+      - "Code compiles cleanly without warnings or errors."
+    retryPolicy:
+      maxRetries: 2
+      backoffMs: 2000
+    timeoutMs: 900000
+  - id: code-review
+    name: "Automated & Peer Code Review"
+    description: "Review implementation against spec, code quality, and maintainability."
+    role: reviewer
+    enabled: true
+    mandatoryGate: false
+    dependsOn:
+      - implementation
+    preferredRuntime: claude-code
+    preferredModel: claude-sonnet-4-6
+    skills:
+      - code-review
+    validators: []
+    acceptanceCriteria:
+      - "No high-severity defects or architectural regressions."
+    retryPolicy:
+      maxRetries: 1
+      backoffMs: 1000
+    timeoutMs: 300000
+  - id: security-review
+    name: "Security & Policy Audit"
+    description: "Audit changes for injection, path traversal, credential exposure, and policy compliance."
+    role: security-auditor
+    enabled: true
+    mandatoryGate: false
+    dependsOn:
+      - implementation
+    preferredRuntime: codex
+    preferredModel: gpt-5-codex
+    skills:
+      - security-review
+    validators: []
+    acceptanceCriteria:
+      - "No secrets exposed, inputs validated, and security invariants preserved."
+    retryPolicy:
+      maxRetries: 1
+      backoffMs: 1000
+    timeoutMs: 300000
+  - id: verification
+    name: "Final Verification Gate"
+    description: "Run all required build, test, and quality validators and produce handoff."
+    role: tester
+    enabled: true
+    mandatoryGate: true
+    dependsOn:
+      - code-review
+      - security-review
+    preferredRuntime: any
+    skills:
+      - handoff
+    validators:
+      - "*"
+    acceptanceCriteria:
+      - "All required project validators pass with exit code 0."
+    retryPolicy:
+      maxRetries: 1
+      backoffMs: 1000
+    timeoutMs: 600000
+    approvalGate:
+      required: true
+      approver: automated-validators
+      reason: "Mandatory build and test gate before completion"

@@ -1,0 +1,66 @@
+schemaVersion: "1.0"
+id: security-review
+name: "Security Review & Hardening Workflow"
+description: "Threat modeling, static/dynamic security audit, remediation, and verification."
+version: "1.0.0"
+stages:
+  - id: threat-modeling
+    name: "Attack Surface & Threat Analysis"
+    description: "Identify trust boundaries, inputs, secrets, and privileged operations."
+    role: security-auditor
+    enabled: true
+    mandatoryGate: false
+    dependsOn: []
+    preferredRuntime: claude-code
+    skills:
+      - security-review
+    validators: []
+    acceptanceCriteria:
+      - "Trust boundaries and potential vulnerabilities are cataloged."
+    retryPolicy:
+      maxRetries: 1
+      backoffMs: 1000
+    timeoutMs: 300000
+  - id: remediation
+    name: "Security Hardening & Fixes"
+    description: "Implement security controls and regression tests for identified findings."
+    role: implementer
+    enabled: true
+    mandatoryGate: false
+    dependsOn:
+      - threat-modeling
+    preferredRuntime: codex
+    skills:
+      - security-review
+      - tdd
+    validators: []
+    acceptanceCriteria:
+      - "All high/medium security findings are mitigated and tested."
+    retryPolicy:
+      maxRetries: 2
+      backoffMs: 1000
+    timeoutMs: 600000
+  - id: security-gate
+    name: "Security Verification Gate"
+    description: "Run all validators and verify security policies."
+    role: security-auditor
+    enabled: true
+    mandatoryGate: true
+    dependsOn:
+      - remediation
+    preferredRuntime: any
+    skills:
+      - security-review
+      - handoff
+    validators:
+      - "*"
+    acceptanceCriteria:
+      - "All security checks and build/test validators pass."
+    retryPolicy:
+      maxRetries: 1
+      backoffMs: 1000
+    timeoutMs: 300000
+    approvalGate:
+      required: true
+      approver: human
+      reason: "Security changes require explicit verification"

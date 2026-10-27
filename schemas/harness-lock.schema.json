@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://delamain.dev/schemas/harness-lock.schema.json",
+  "title": "Delamain Harness Lockfile",
+  "type": "object",
+  "required": ["lockfileVersion", "harnessVersion", "generatedAt", "profile", "skills", "workflows", "managedFiles"],
+  "additionalProperties": false,
+  "properties": {
+    "lockfileVersion": { "type": "integer", "const": 1 },
+    "harnessVersion": { "type": "string", "minLength": 1 },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "profile": { "type": "string" },
+    "skills": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["name", "version", "sourcePath", "installedPath", "sha256"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "version": { "type": "string" },
+          "sourcePath": { "type": "string" },
+          "installedPath": { "type": "string" },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+        }
+      }
+    },
+    "workflows": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["id", "version", "installedPath", "sha256"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "version": { "type": "string" },
+          "installedPath": { "type": "string" },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+        }
+      }
+    },
+    "managedFiles": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["path", "ownership", "sha256"],
+        "additionalProperties": false,
+        "properties": {
+          "path": { "type": "string" },
+          "ownership": { "type": "string", "enum": ["generated", "merged-markers", "user-preserved"] },
+          "runtime": { "type": "string" },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+        }
+      }
+    }
+  }
+}
